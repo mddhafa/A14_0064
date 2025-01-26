@@ -32,7 +32,14 @@ object PenyediaViewModel{
         initializer { DetailVillaViewModel(createSavedStateHandle(),aplikasiVilla().container.villaRepository) }
         initializer { UpdateVillaViewModel(createSavedStateHandle(),aplikasiVilla().container.villaRepository) }
 
+        //Pelanggan
+        initializer { HomePelangganViewModel(aplikasiVilla().container.pelangganRepository) }
+        initializer { InsertPelangganViewModel(aplikasiVilla().container.pelangganRepository) }
+        initializer { DetailPelangganViewModel(createSavedStateHandle(),aplikasiVilla().container.pelangganRepository) }
+        initializer { UpdatePelangganViewModel(createSavedStateHandle(),aplikasiVilla().container.pelangganRepository) }
 
+
+    }
 }
 
 fun CreationExtras.aplikasiVilla(): ReservasiVillaApplications =
