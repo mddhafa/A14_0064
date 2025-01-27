@@ -3,6 +3,7 @@ package com.example.villa.ui.customwidget
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +30,7 @@ fun BottomMenuBar(
     BottomAppBar(
         modifier = Modifier
             .fillMaxWidth()
+            .fillMaxHeight(0.15f) // Adjust height to make it fill the bottom
             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
             .shadow(8.dp),
         containerColor = Color.Transparent,
@@ -51,27 +53,32 @@ fun BottomMenuBar(
                 BottomMenuItem(
                     title = "Villa",
                     iconRes = R.drawable.vila,
-                    onClick = onVilla
+                    onClick = onVilla,
+                    isActive = false
                 )
                 BottomMenuItem(
                     title = "Reservasi",
                     iconRes = R.drawable.reservasi,
-                    onClick = onReservasi
+                    onClick = onReservasi,
+                    isActive = false
                 )
                 BottomMenuItem(
                     title = "Home",
                     iconRes = R.drawable.home,
-                    onClick = onHome
+                    onClick = onHome,
+                    isActive = true // Highlighted item
                 )
                 BottomMenuItem(
                     title = "Pelanggan",
                     iconRes = R.drawable.pelanggan,
-                    onClick = onPelanggan
+                    onClick = onPelanggan,
+                    isActive = false
                 )
                 BottomMenuItem(
                     title = "Review",
                     iconRes = R.drawable.review,
-                    onClick = onReview
+                    onClick = onReview,
+                    isActive = false
                 )
             }
         }
@@ -82,7 +89,8 @@ fun BottomMenuBar(
 fun BottomMenuItem(
     title: String,
     iconRes: Int,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    isActive: Boolean
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -90,19 +98,30 @@ fun BottomMenuItem(
             .padding(8.dp)
             .clickable { onClick() }
     ) {
-
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = title,
-            modifier = Modifier.size(24.dp),
-            tint = Color.White
-        )
+        Box(
+            modifier = if (isActive) {
+                Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(Color.White)
+            } else {
+                Modifier.size(48.dp)
+            },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = iconRes),
+                contentDescription = title,
+                modifier = Modifier.size(24.dp),
+                tint = if (isActive) Color(0xFF2F80ED) else Color.White
+            )
+        }
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = title,
             fontSize = 10.sp,
-            color = Color.White,
-            fontWeight = FontWeight.SemiBold
+            color = if (isActive) Color.White else Color.White.copy(alpha = 0.7f),
+            fontWeight = if (isActive) FontWeight.Bold else FontWeight.SemiBold
         )
     }
 }

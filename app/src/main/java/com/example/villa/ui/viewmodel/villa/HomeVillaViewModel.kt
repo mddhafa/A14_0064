@@ -17,7 +17,9 @@ sealed class HomeVillaUiState{
     object Loading : HomeVillaUiState()
 }
 
-class HomeVillaViewModel (private val villa: VillaRepository): ViewModel(){
+class HomeVillaViewModel (
+    private val villa: VillaRepository
+): ViewModel(){
     var villaUiState: HomeVillaUiState by mutableStateOf(HomeVillaUiState.Loading)
         private set
 

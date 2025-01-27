@@ -3,7 +3,7 @@ package com.example.villa.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Card
@@ -28,164 +28,205 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.villa.R
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.villa.ui.customwidget.Navbar
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.ui.res.stringResource
+import com.example.villa.model.Villa
+import com.example.villa.ui.customwidget.BottomMenuBar
+import com.example.villa.ui.customwidget.CostumeTopAppBar
 import com.example.villa.ui.navigation.DestinasiNavigasi
+import com.example.villa.ui.viewmodel.PenyediaViewModel
+import com.example.villa.ui.viewmodel.villa.HomeVillaUiState
+import com.example.villa.ui.viewmodel.villa.HomeVillaViewModel
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "Home"
     override val titleRes = "home"
 }
-
 @Composable
 fun HomeTokoView(
     onVilla: () -> Unit = {},
-    onAddSpr: () -> Unit = {},
-    onListBrg: (String) -> Unit = {},
-    onListSpr: (String) -> Unit = {}
+    onReview: () -> Unit = {},
+    onPelanggan: () -> Unit = {},
+    onHome: () -> Unit = {},
+    onReservasi: () -> Unit = {},
+    onDetailClick: (Int) -> Unit = {},
+    viewModel: HomeVillaViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
-    val scrollState = rememberScrollState()
-
     Scaffold(
         topBar = {
             Navbar(
-                namaUser = "Apa Kabar?",
+                nama = "Ayo Reservasi Villa di Sini",
                 showBackButton = false
+            )
+        },
+        bottomBar = {
+            BottomMenuBar(
+                onVilla = onVilla,
+                onReview = onReview,
+                onHome = onHome,
+                onPelanggan = onPelanggan,
+                onReservasi = onReservasi
             )
         }
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-                .padding(16.dp)
-                .padding(top = 50.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Selamat Datang di Aplikasi Kami",
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF0D47A1),
-                    modifier = Modifier.padding(bottom = 5.dp)
-                )
-                Text(
-                    text = "Temukan Villa yang Cocok dan Nyaman di Sini.",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Gray
-                )
-                Spacer(modifier = Modifier.height(40.dp))
-            }
-
-            // Grid menu
-            GridMenu(
-                onVilla = onVilla,
-                onAddSpr = onAddSpr,
-                onListBrg = onListBrg,
-                onListSpr = onListSpr
-            )
-        }
+        HomeStatus(
+            homeVillaUiState = viewModel.villaUiState,
+            retryAction = { viewModel.getVilla() },
+            onDetailClick = onDetailClick,
+            modifier = Modifier.padding(innerPadding),
+        )
     }
 }
+
 @Composable
-fun GridMenu(
-    onVilla: () -> Unit = {},
-    onAddSpr: () -> Unit = {},
-    onListBrg: (String) -> Unit = {},
-    onListSpr: (String) -> Unit = {}
+fun HomeStatus(
+    homeVillaUiState: HomeVillaUiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    onDetailClick: (Int) -> Unit,
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            MenuCard(
-                title = "Lihat Villa",
-                iconRes = R.drawable.vila,
-                onClick = onVilla,
-                modifier = Modifier.weight(1f)
-            )
+    when (homeVillaUiState) {
+        is HomeVillaUiState.Loading -> {
+            OnLoading(modifier = modifier.fillMaxSize())
+        }
 
+        is HomeVillaUiState.Success -> {
+            if (homeVillaUiState.villa.isEmpty()) {
+                Box(
+                    modifier = modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "Tidak ada data Villa")
+                }
+            } else {
+                VillaLayout(
+                    villa = homeVillaUiState.villa,
+                    modifier = modifier.fillMaxWidth(),
+                    onDetailClick = onDetailClick,
+                )
+            }
         }
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            MenuCard(
-                title = "Lihat Jadwal",
-                iconRes = R.drawable.reservasi,
-                onClick = { onListBrg("Barang List") },
-                modifier = Modifier.weight(1f)
-            )
+
+        is HomeVillaUiState.Error -> {
+            OnError(retryAction, modifier = modifier.fillMaxSize())
         }
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            MenuCard(
-                title = "Lihat Pelanggan",
-                iconRes = R.drawable.pelanggan,
-                onClick = { onListSpr("Supplier List") },
-                modifier = Modifier.weight(1f)
-            )
-        }
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            MenuCard(
-                title = "Lihat Review",
-                iconRes = R.drawable.review,
-                onClick = onAddSpr,
-                modifier = Modifier.weight(1f)
-            )
+    }
+}
+
+@Composable
+fun OnLoading(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(R.drawable.loading),
+            contentDescription = stringResource(R.string.loading)
+        )
+    }
+}
+
+@Composable
+fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.connecction_error),
+            contentDescription = stringResource(R.string.loading)
+        )
+        Text(
+            text = stringResource(R.string.loading_failed),
+            modifier = Modifier.padding(16.dp)
+        )
+        Button(onClick = retryAction) {
+            Text(stringResource(R.string.retry))
         }
     }
 }
 @Composable
-fun MenuCard(
-    title: String,
-    iconRes: Int,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
+fun VillaLayout(
+    villa: List<Villa>,
+    modifier: Modifier = Modifier,
+    onDetailClick: (Int) -> Unit,
+) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp),
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(villa) { villa ->
+            VillaCard(
+                villa = villa,
+                onDetailClick = onDetailClick
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun VillaCard(
+    villa: Villa,
+    modifier: Modifier = Modifier,
+    onDetailClick: (Int) -> Unit,
 ) {
     Card(
-        onClick = onClick,
+        onClick = { onDetailClick(villa.id_villa) },
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF64B5F6)
-        ),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp),
-        modifier = modifier
-            .height(120.dp)
-            .fillMaxWidth()
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.padding(16.dp)
         ) {
-            Icon(
-                painter = painterResource(id = iconRes),
-                contentDescription = title,
-                modifier = Modifier.size(32.dp),
-                tint = Color.White
-            )
+            // Villa Image Header
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp)
+                    .background(
+                        Brush.linearGradient(
+                            colors = listOf(Color(0xFF56CCF2), Color(0xFF2F80ED))
+                        )
+                    ),
+            ) {
+                Text(
+                    text = villa.nama_villa,
+                    color = Color.White,
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(8.dp)
+                )
+            }
+
             Spacer(modifier = Modifier.height(12.dp))
+
+            // Villa Details
             Text(
-                text = title,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.White
+                text = "Alamat: ${villa.alamat}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray
+            )
+            Text(
+                text = "Kamar Tersedia: ${villa.kamar_tersedia}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold
             )
         }
     }

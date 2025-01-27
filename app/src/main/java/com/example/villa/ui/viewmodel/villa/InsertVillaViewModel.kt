@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
+import com.example.villa.model.Review
 import kotlinx.coroutines.launch
 
 class InsertVillaViewModel (private val vla: VillaRepository): ViewModel(){
@@ -36,14 +37,14 @@ fun Villa.toInsertVillaUiEvent(): InsertVillaUiEvent = InsertVillaUiEvent(
     id_villa = id_villa,
     nama_villa = nama_villa,
     alamat = alamat,
-    kamar_tersedia = kamar_tersedia
+    kamar_tersedia = kamar_tersedia,
 )
 
 fun InsertVillaUiEvent.toVilla(): Villa = Villa(
     id_villa = id_villa,
     nama_villa = nama_villa,
     alamat = alamat,
-    kamar_tersedia = kamar_tersedia
+    kamar_tersedia = kamar_tersedia,
 )
 
 data class InsertVillaUiState(
@@ -55,4 +56,5 @@ data class InsertVillaUiEvent(
     val nama_villa: String ="",
     val alamat: String = "",
     val kamar_tersedia: Int = 0,
+    val review: List<Review> = emptyList() // Default kosong
 )

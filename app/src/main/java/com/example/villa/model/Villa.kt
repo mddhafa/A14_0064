@@ -18,8 +18,9 @@ data class VillaResponseDetail(
 
 @Serializable
 data class  Villa (
-    val id_villa: Int? = null,
+    val id_villa: Int,
     val nama_villa: String,
     val alamat: String,
-    val kamar_tersedia: Int
+    var kamar_tersedia: Int,
+    val review: List<Review> = emptyList()
 )

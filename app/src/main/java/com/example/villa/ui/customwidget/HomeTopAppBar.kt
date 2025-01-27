@@ -5,10 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,19 +23,19 @@ import com.example.villa.R
 @Preview(showBackground = true)
 @Composable
 fun NavbarPreview() {
-    Navbar(namaUser = "Muhammad Dhafa",  showBackButton = true)
+    Navbar(nama = "Muhammad Dhafa",  showBackButton = true)
 }
 
 @Composable
 fun Navbar(
-    namaUser: String,
+    nama: String,
     showBackButton: Boolean = true
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clip(RoundedCornerShape(bottomEnd = 40.dp, bottomStart = 40.dp))
+            .clip(RoundedCornerShape(bottomEnd = 50.dp, bottomStart = 50.dp, topStart = 50.dp, topEnd = 50.dp))
             .background(color = Color(0xFF00BFFF))
     ) {
         Row(
@@ -52,19 +48,18 @@ fun Navbar(
                     .padding(end = 20.dp)
             ) {
                 Text(
-                    text = "Hallo,",
+                    text = "Selamat Datang",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 24.sp
                 )
                 Text(
-                    text = namaUser,
+                    text = nama,
                     color = Color.White,
                     fontStyle = FontStyle.Italic,
                     fontSize = 16.sp
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-
             }
 
             Spacer(modifier = Modifier.weight(1f))

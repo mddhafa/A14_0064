@@ -77,14 +77,17 @@ fun DetailScreen(
                     is DetailVillaUiState.Loading -> CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center)
                     )
+
                     is DetailVillaUiState.Error -> Text(
                         text = "Gagal memuat data.",
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.align(Alignment.Center)
                     )
+
                     is DetailVillaUiState.Success -> {
                         val villa = uiState.villa
-                        val review = uiState.review
+                        val review = uiState.review // Mengambil daftar review
+
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -101,37 +104,25 @@ fun DetailScreen(
                                     modifier = Modifier.padding(16.dp),
                                     verticalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
-                                    Text(text = "Id Villa: ${villa.id_villa}", style = MaterialTheme.typography.bodyLarge)
-                                    Text(text = "Nama Villa: ${villa.nama_villa}", style = MaterialTheme.typography.bodyLarge)
-                                    Text(text = "Alamat: ${villa.alamat}", style = MaterialTheme.typography.bodyLarge)
-                                    Text(text = "Kamar Tersedia: ${villa.kamar_tersedia}", style = MaterialTheme.typography.bodyLarge)
-                                }
-                            }
-
-                            // Tombol Edit
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceEvenly
-                            ) {
-                                Button(onClick = { onEditClick(villa.id_villa) }) {
-                                    Text("Edit Villa")
-                                }
-                                Button(onClick = {
-                                    viewModel.deleteVilla(
-                                        idVilla = villa.id_villa,
-                                        onSuccess = {
-                                            onBackClick()
-                                        },
-                                        onError = {}
+                                    Text(
+                                        text = "Id Villa: ${villa.id_villa}",
+                                        style = MaterialTheme.typography.bodyLarge
                                     )
-                                }) {
-                                    Text("Hapus Villa")
-                                }
-
-                                Button(onClick = navigateToInsertReservasi) {
-                                    Text("Reservasi Villa")
+                                    Text(
+                                        text = "Nama Villa: ${villa.nama_villa}",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                    Text(
+                                        text = "Alamat: ${villa.alamat}",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                    Text(
+                                        text = "Kamar Tersedia: ${villa.kamar_tersedia}",
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
                                 }
                             }
+
                             // Bagian Review
                             Card(
                                 modifier = Modifier
@@ -188,7 +179,6 @@ fun DetailScreen(
                                     }
                                 }
                             }
-
                         }
                     }
                 }
@@ -196,4 +186,5 @@ fun DetailScreen(
         }
     )
 }
+
 

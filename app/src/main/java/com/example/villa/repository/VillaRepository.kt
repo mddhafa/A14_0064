@@ -26,11 +26,21 @@ class NetworkVillaRepository(
     }
 
     override suspend fun updateVilla(id_villa: Int, villa: Villa) {
-        TODO("Not yet implemented")
+        villaService.updateVilla(id_villa, villa)
     }
 
     override suspend fun deleteVilla(id_villa: Int) {
-        TODO("Not yet implemented")
+        try {
+            val response = villaService.deleteVilla(id_villa)
+
+            if (!response.isSuccessful) {
+                val errorBody = response.errorBody()?.string() ?: "Unknown error"
+                throw Exception("Failed to delete villa: $errorBody")
+            }
+        } catch (e: Exception) {
+            println("Error deleting villa with ID $id_villa: ${e.message}")
+            throw e
+        }
     }
 
     override suspend fun getVillaById(id_villa: Int): VillaResponseDetail {

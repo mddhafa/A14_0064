@@ -41,15 +41,25 @@ class DetailVillaViewModel(
             villaDetailState = try {
                 val villaResponse = vla.getVillaById(id)
                 val villa = villaResponse.data
-                val review = villa.Review
+                val review = villa.review
+
+                // Debug log
+                println("Villa: $villa")
+                println("Review: $review")
+                println("Villa Response: $villaResponse")
+                println("Review: ${villa.review}")
+
                 DetailVillaUiState.Success(villa, review)
             } catch (e: IOException) {
+                println("Error: ${e.message}")
                 DetailVillaUiState.Error
             } catch (e: HttpException) {
+                println("Error: ${e.message}")
                 DetailVillaUiState.Error
             }
         }
     }
+
 
     fun deleteVilla(idVilla: Int, onSuccess: () -> Unit, onError: () -> Unit) {
         viewModelScope.launch {
