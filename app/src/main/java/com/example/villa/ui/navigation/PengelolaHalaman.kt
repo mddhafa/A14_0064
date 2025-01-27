@@ -251,7 +251,48 @@ fun PengelolaHalaman(
 
         }
 
+        // Review
+        composable(DestinasiHomeReview.route) {
+            HomeReviewScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToInsertReview = { navController.navigate(DestinasiInsertReview.route) },
+                onEditClick = { id_review ->
+                    navController.navigate("${DestinasiUpdateReview.route}/$id_review")
+                    println("PengelolaHalaman : id_review = $id_review")
+                },
+                onVilla = { navController.navigate(DestinasiHomeVilla.route) },
+                onReservasi = { navController.navigate(DestinasiHomeReservasi.route) },
+                onHome = { navController.navigate(DestinasiHome.route) },
+                onPelanggan = { navController.navigate(DestinasiHomePelanggan.route) },
+                onReview = { navController.navigate(DestinasiHomeReview.route) }
+            )
+        }
 
+        composable(DestinasiInsertReview.route) {
+            InsertReviewScreen(
+                navigateBack = { navController.popBackStack() }
+            )
+        }
 
+        composable(
+            DestinasiUpdateReview.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiUpdateReview.ID_Review) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val id_review = backStackEntry.arguments?.getInt(DestinasiUpdateReview.ID_Review)
+                ?: return@composable
+
+            UpdateReviewScreen(
+                onNavigate = {
+                    navController.navigate(DestinasiHomeReview.route) {
+                        popUpTo(DestinasiHomeReview.route) { inclusive = true }
+                    }
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
     }
 }
