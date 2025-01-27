@@ -38,6 +38,31 @@ object PenyediaViewModel{
         initializer { DetailPelangganViewModel(createSavedStateHandle(),aplikasiVilla().container.pelangganRepository) }
         initializer { UpdatePelangganViewModel(createSavedStateHandle(),aplikasiVilla().container.pelangganRepository) }
 
+        //Reservasi
+        initializer {
+            HomeReservasiViewModel(
+                aplikasiVilla().container.reservasiRepository,
+                villaRepository = aplikasiVilla().container.villaRepository) }
+        initializer {
+            DetailReservasiViewModel(
+                createSavedStateHandle(),aplikasiVilla().container.reservasiRepository,
+                vla = aplikasiVilla().container.villaRepository,
+                plg = aplikasiVilla().container.pelangganRepository) }
+        initializer {
+            InsertReservasiViewModel(
+                rsv = aplikasiVilla().container.reservasiRepository,
+                vla = aplikasiVilla().container.villaRepository,
+                plg = aplikasiVilla().container.pelangganRepository
+            )
+        }
+        initializer {
+            UpdateReservasiViewModel(
+                createSavedStateHandle(),aplikasiVilla().container.reservasiRepository,
+                villaRepository = aplikasiVilla().container.villaRepository,
+                pelangganRepository = aplikasiVilla().container.pelangganRepository
+            )
+        }
+
 
     }
 }
