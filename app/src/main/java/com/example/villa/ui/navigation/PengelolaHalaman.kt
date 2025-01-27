@@ -59,7 +59,11 @@ fun PengelolaHalaman(
                 onReservasi = { navController.navigate(DestinasiHomeReservasi.route)},
                 onHome = { navController.navigate(DestinasiHome.route)},
                 onPelanggan = {navController.navigate(DestinasiHomePelanggan.route)},
-                onReview = {navController.navigate(DestinasiHomeReview.route)}
+                onReview = {navController.navigate(DestinasiHomeReview.route)},
+                onDetailClick = { id_villa ->
+                    navController.navigate("${DestinasiDetailVilla.route}/$id_villa")
+                    println("PengelolaHalaman: id_villa = $id_villa")
+                }
             )
         }
 
@@ -187,6 +191,64 @@ fun PengelolaHalaman(
                     }
                 )
             }
+        }
+
+        //Reservasi
+        composable(DestinasiHomeReservasi.route){
+            HomeReservasiScreen(
+                navigateBack = {navController.popBackStack()},
+                navigateToInsertReservasi = {navController.navigate(DestinasiInsertReservasi.route)},
+                onDetailClick = {id_reservasi ->
+                    navController.navigate("${DestinasiDetailReservasi.route}/$id_reservasi")
+                    println("PengelolaHalaman : id_reservasi = $id_reservasi")
+                },
+                onVilla = { navController.navigate(DestinasiHomeVilla.route) },
+                onReservasi = { navController.navigate(DestinasiHomeReservasi.route)},
+                onHome = { navController.navigate(DestinasiHome.route)},
+                onPelanggan = {navController.navigate(DestinasiHomePelanggan.route)},
+                onReview = {navController.navigate(DestinasiHomeReview.route)}
+            )
+        }
+        composable(DestinasiDetailReservasi.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailReservasi.ID_Reservasi){
+                    type = NavType.IntType
+                }
+            )
+        ){ backStackEntry ->
+            val id_reservasi = backStackEntry.arguments?.getInt(DestinasiDetailReservasi.ID_Reservasi) ?: return@composable
+            DetailReservasiScreen(
+                onBackClick = { navController.popBackStack() },
+                onEditClick = {
+                    navController.navigate("${DestinasiUpdateReservasi.route}/$id_reservasi")
+                }
+            )
+
+        }
+        composable(DestinasiInsertReservasi.route){
+            InsertReservasiScreen(
+                navigateBack = {navController.popBackStack()},
+            )
+        }
+        composable(
+            DestinasiUpdateReservasi.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiUpdateReservasi.ID_Reservasi){
+                    type = NavType.IntType
+                }
+            )
+        ){
+            backStackEntry ->
+            val id_reservasi = backStackEntry.arguments?.getInt(DestinasiUpdateReservasi.ID_Reservasi) ?: return@composable
+            UpdateReservasiScreen(
+                onNavigate = {
+                    navController.navigate(DestinasiHomeReservasi.route) {
+                        popUpTo(DestinasiHomeReservasi.route) { inclusive = true }
+                    }
+                },
+                onBack = { navController.popBackStack() }
+            )
+
         }
 
 
