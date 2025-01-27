@@ -63,7 +63,15 @@ object PenyediaViewModel{
             )
         }
 
-
+        //Review
+        initializer { HomeReviewViewModel(aplikasiVilla().container.reviewRepository,
+            reservasiVillaRepository = aplikasiVilla().container.reservasiRepository,
+            pelangganRepository = aplikasiVilla().container.pelangganRepository)
+        }
+        initializer { InsertReviewViewModel(aplikasiVilla().container.reviewRepository,
+            res = aplikasiVilla().container.reservasiRepository) }
+        initializer { UpdateReviewViewModel(createSavedStateHandle(),aplikasiVilla().container.reviewRepository,
+            reservasiVillaRepository = aplikasiVilla().container.reservasiRepository) }
     }
 }
 
