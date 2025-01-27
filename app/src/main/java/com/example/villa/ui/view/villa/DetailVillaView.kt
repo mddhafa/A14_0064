@@ -122,6 +122,29 @@ fun DetailScreen(
                                     )
                                 }
                             }
+                            // Tombol Edit
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceEvenly
+                            ) {
+                                Button(onClick = { onEditClick(villa.id_villa) }) {
+                                    Text("Edit Villa")
+                                }
+                                Button(onClick = {
+                                    viewModel.deleteVilla(
+                                        idVilla = villa.id_villa,
+                                        onSuccess = {
+                                            onBackClick()
+                                        },
+                                        onError = {}
+                                    )
+                                }) {
+                                    Text("Hapus Villa")
+                                }
+                                Button(onClick = navigateToInsertReservasi) {
+                                    Text("Reservasi Villa")
+                                }
+                            }
 
                             // Bagian Review
                             Card(
