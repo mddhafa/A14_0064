@@ -21,6 +21,7 @@ interface AppContainer {
     val villaRepository: VillaRepository
     val pelangganRepository: PelangganRepository
     val reservasiRepository: ReservasiVillaRepository
+    val reviewRepository: ReviewRepository
 }
 
 class VillaContainer : AppContainer{
@@ -40,7 +41,9 @@ class VillaContainer : AppContainer{
     private val reservasiService: ReservasiService by lazy {
         retrofit.create(ReservasiService::class.java)
     }
-
+    private val reviewService: ReviewService by lazy {
+        retrofit.create(ReviewService::class.java)
+    }
 
     override val villaRepository: VillaRepository by lazy {
         NetworkVillaRepository(villaService)
@@ -54,5 +57,8 @@ class VillaContainer : AppContainer{
         NetworkReservasiRepository(reservasiService)
     }
 
+    override val reviewRepository: ReviewRepository by lazy {
+        NetworkReviewRepository(reviewService)
+    }
 
 }
