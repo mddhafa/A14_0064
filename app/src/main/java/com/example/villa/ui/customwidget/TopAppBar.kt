@@ -2,6 +2,7 @@ package com.example.villa.ui.customwidget
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.*
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material.icons.Icons
@@ -37,6 +38,7 @@ fun CostumeTopAppBar(
                 color = MaterialTheme.colorScheme.onPrimary
             )
         },
+        windowInsets = WindowInsets(0),
         actions = {
             IconButton(onClick = { onRefresh() }) {
                 Icon(

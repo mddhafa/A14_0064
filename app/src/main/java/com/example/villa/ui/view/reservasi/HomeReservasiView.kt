@@ -22,6 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -90,7 +91,8 @@ fun HomeReservasiScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = navigateToInsertReservasi,
-                shape = MaterialTheme.shapes.medium, modifier = Modifier.padding(18.dp)
+                shape = MaterialTheme.shapes.medium, modifier = Modifier.padding(18.dp),
+
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Villa")
             }
@@ -232,6 +234,11 @@ fun ReservasiCard(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Image(
+                    painter = painterResource(R.drawable.key),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
                 Text(
                     text = reservasi.id_reservasi.toString(),
                     style = MaterialTheme.typography.titleLarge,
@@ -242,24 +249,64 @@ fun ReservasiCard(
                         imageVector = Icons.Default.Delete, contentDescription = null,
                     )
                 }
-
             }
-            Text(
-                text = "Villa: ${villa?.id_villa?: "Tidak ditemukan"}",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = "${villa?.nama_villa?: "Tidak ditemukan"}",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = "Check In: ${reservasi.check_in}",
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Text(
-                text = "Jumlah Kamar: ${reservasi.jumlah_kamar.toString()}",
-                style = MaterialTheme.typography.bodyMedium
-            )
+            HorizontalDivider()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.handkey),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "Villa: ${villa?.id_villa ?: "Tidak ditemukan"}",
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.homevilla),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "${villa?.nama_villa ?: "Tidak ditemukan"}",
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.calendarclock),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "Check In: ${reservasi.check_in}",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.door),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "${reservasi.jumlah_kamar.toString()}",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
 
 

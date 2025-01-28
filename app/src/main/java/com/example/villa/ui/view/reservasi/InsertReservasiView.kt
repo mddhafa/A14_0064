@@ -58,9 +58,7 @@ fun InsertReservasiScreen(
     val uiState = viewModel.uiReservasiState
 
     if (uiState.isSuccess) {
-        // You can show a success message or just navigate back directly
         LaunchedEffect(Unit) {
-            // Wait a short time before navigating back
             delay(1000)
             navigateBack()
         }

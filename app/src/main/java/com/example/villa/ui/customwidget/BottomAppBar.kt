@@ -2,6 +2,7 @@ package com.example.villa.ui.customwidget
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -30,12 +31,14 @@ fun BottomMenuBar(
     BottomAppBar(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.15f) // Adjust height to make it fill the bottom
+            .fillMaxHeight(0.1f)
             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
             .shadow(8.dp),
         containerColor = Color.Transparent,
         contentPadding = PaddingValues(0.dp),
-    ) {
+        windowInsets = WindowInsets(0),
+
+        ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()

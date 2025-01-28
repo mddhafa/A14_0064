@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -69,7 +70,9 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = navigateToInsertVilla,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(18.dp)
+                modifier = Modifier.padding(18.dp),
+                containerColor = Color(0xFF00BFFF),
+                contentColor = Color.White
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Villa")
             }
@@ -190,10 +193,17 @@ fun VillaCard(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Image(
+                    painter = painterResource(R.drawable.homevilla),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
                 Text(
                     text = villa.nama_villa,
                     style = MaterialTheme.typography.titleLarge,
@@ -204,10 +214,20 @@ fun VillaCard(
                     style = MaterialTheme.typography.bodyMedium,
                 )
             }
-            Text(
-                text = villa.alamat,
-                style = MaterialTheme.typography.bodyMedium
-            )
+            HorizontalDivider()
+            Row (modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Image(
+                    painter = painterResource(R.drawable.map),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = villa.alamat,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 }
