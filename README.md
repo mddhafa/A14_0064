@@ -1,16 +1,16 @@
-<img width="221" alt="home" src="https://github.com/user-attachments/assets/40de61bb-e238-42b9-9525-4c4aa4491e04" />
-<img width="221" alt="home vila" src="https://github.com/user-attachments/assets/4330adce-7d36-4771-8fd4-25429a0a77ee" />
-<img width="221" alt="insert villa" src="https://github.com/user-attachments/assets/57f1a96f-bde1-4d38-bf45-74458186f147" />
-<img width="221" alt="update villa" src="https://github.com/user-attachments/assets/4a6b5d1b-1fd5-446f-8ebe-be07ba7c91c8" />
-<img width="221" alt="detail villa" src="https://github.com/user-attachments/assets/2fb12a40-0cfb-4870-8854-5fd6fb08eb46" />
-<img width="221" alt="home reservasi" src="https://github.com/user-attachments/assets/87c37460-f4b1-4628-884a-714af9ff470f" />
-<img width="221" alt="detail reservasi" src="https://github.com/user-attachments/assets/38337023-c896-4ff5-9b50-53e20b5e83b6" />
-<img width="221" alt="insert reservasi" src="https://github.com/user-attachments/assets/695b4bea-83bd-40c6-8b01-f3731a88afdb" />
-<img width="221" alt="update reservasi" src="https://github.com/user-attachments/assets/9657ae3b-74cd-4906-b73f-ccea37606dab" />
-<img width="221" alt="home pelanggan" src="https://github.com/user-attachments/assets/4ed484b2-4e67-4619-b7a5-514734f8e45b" />
-<img width="221" alt="Inser pelanggan" src="https://github.com/user-attachments/assets/ce18c8df-bc30-49e9-a9be-a7db244565d5" />
-<img width="221" alt="update pelanggan" src="https://github.com/user-attachments/assets/453eae5e-8a2a-417e-b3f4-2ec9b3d020bc" />
-<img width="221" alt="detail pelanggan" src="https://github.com/user-attachments/assets/8cec17d2-ab83-413a-bb58-a54d942f2fba" />
-<img width="221" alt="home review" src="https://github.com/user-attachments/assets/6e672c7f-1abc-44cf-a39b-942083cf34dd" />
-<img width="221" alt="insert review" src="https://github.com/user-attachments/assets/45fb3636-8098-4486-a149-c0c33409c21d" />
-<img width="221" alt="update review" src="https://github.com/user-attachments/assets/ad8aeec7-cd66-44eb-a357-5efda5bfdd5c" />
+<img width="221" alt="home" src="https://github.com/user-attachments/assets/f1be5670-da03-4179-91ca-7419c410f52a" /> 
+<img width="221" alt="home vila" src="https://github.com/user-attachments/assets/063a92d0-8978-46f8-87c8-a1848c3c1149" />
+<img width="221" alt="insert villa" src="https://github.com/user-attachments/assets/71892f6b-499a-4fc9-ae55-299ba49efa33" />
+<img width="221" alt="update villa" src="https://github.com/user-attachments/assets/5799b53d-f977-40fd-90b2-e40764b8fcc2" />
+<img width="221" alt="detail villa" src="https://github.com/user-attachments/assets/9d8c6a9c-3df8-4e48-baf1-d5eafdfc672e" />
+<img width="221" alt="home reservasi" src="https://github.com/user-attachments/assets/eeed226d-d3d9-415e-9bb7-bfe25fd4557e" />
+<img width="221" alt="detail reservasi" src="https://github.com/user-attachments/assets/a6102aa8-da24-487e-9843-1fafff656704" />
+<img width="221" alt="insert reservasi" src="https://github.com/user-attachments/assets/16b2aea5-6595-479d-b79a-71b310c67515" />
+<img width="221" alt="update reservasi" src="https://github.com/user-attachments/assets/9acb9030-41e6-4b51-99f6-b8b50f442afd" />
+<img width="221" alt="home pelanggan" src="https://github.com/user-attachments/assets/84054918-14cc-4a69-bf3b-f6efc2604fb7" />
+<img width="221" alt="Inser pelanggan" src="https://github.com/user-attachments/assets/9823381d-d686-466f-b70a-805d2b838f02" />
+<img width="221" alt="update pelanggan" src="https://github.com/user-attachments/assets/d3a41f20-1640-4eb3-8168-1d0ad2c4c22f" />
+<img width="221" alt="detail pelanggan" src="https://github.com/user-attachments/assets/448e47e3-a627-4af2-bb09-7701bf92da52" />
+<img width="221" alt="home review" src="https://github.com/user-attachments/assets/e74f8df6-a00f-4855-92e7-ef52961feae9" />
+<img width="221" alt="insert review" src="https://github.com/user-attachments/assets/3548632c-2f1d-449e-8052-e2cc934adebf" />
+<img width="221" alt="update review" src="https://github.com/user-attachments/assets/977c0fa3-3596-4c1e-9387-891dc1a7dc9f" />
