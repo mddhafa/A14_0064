@@ -23,6 +23,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +33,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -92,7 +94,9 @@ fun HomeReviewScreen(
             FloatingActionButton(
                 onClick = navigateToInsertReview,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(18.dp)
+                modifier = Modifier.padding(18.dp),
+                containerColor = Color(0xFF00BFFF),
+                contentColor = Color.White
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Review")
             }
@@ -229,6 +233,11 @@ fun ReviewCard(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Image(
+                    painter = painterResource(id = R.drawable.key),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
                 Text(
                     text = review.id_review.toString(),
                     style = MaterialTheme.typography.titleLarge,
@@ -242,23 +251,64 @@ fun ReviewCard(
                     )
                 }
             }
+            HorizontalDivider()
             // Menampilkan nama pelanggan dari reservasi
-            Text(
-                text = "Reservasi: ${reservasi?.id_reservasi ?: "Tidak ditemukan"}",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = "Pelanggan: ${pelanggan?.nama_pelanggan?: "Tidak ditemukan"}",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = "Komentar: ${review.komentar ?: "Tidak ada komentar"}",
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Text(
-                text = "Nilai: ${review.nilai}",
-                style = MaterialTheme.typography.bodyMedium,
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.booking),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "Reservasi: ${reservasi?.id_reservasi ?: "Tidak ditemukan"}",
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.user),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "${pelanggan?.nama_pelanggan ?: "Tidak ditemukan"}",
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.comment),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "Komentar: ${review.komentar ?: "Tidak ada komentar"}",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.feedback),
+                    contentDescription = "",
+                    modifier = modifier.size(25.dp).padding(end = 8.dp)
+                )
+                Text(
+                    text = "Nilai: ${review.nilai}",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
         }
     }
 }

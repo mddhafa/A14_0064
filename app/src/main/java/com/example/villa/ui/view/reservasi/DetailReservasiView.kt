@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -26,7 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.villa.ui.customwidget.CostumeTopAppBar
 import com.example.villa.ui.navigation.DestinasiNavigasi
+import com.example.villa.ui.view.pelanggan.DestinasiDetaiPelanggan
 import com.example.villa.ui.viewmodel.PenyediaViewModel
 import com.example.villa.ui.viewmodel.reservasi.DetailReservasiUiState
 import com.example.villa.ui.viewmodel.reservasi.DetailReservasiViewModel
@@ -41,25 +45,21 @@ object DestinasiDetailReservasi : DestinasiNavigasi {
 @Composable
 fun DetailReservasiScreen(
     onEditClick: (Int) -> Unit,
+    navigateBack: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailReservasiViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val uiState = viewModel.reservasiDetailUiState
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(DestinasiDetailReservasi.titleRes) },
-                navigationIcon = {
-                    IconButton(onClick = { onBackClick() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+            CostumeTopAppBar(
+                title = DestinasiDetailReservasi.titleRes,
+                canNavigateBack = true,
+                scrollBehavior = scrollBehavior,
+                navigateUp = navigateBack
             )
         },
         content = { paddingValues ->
@@ -109,7 +109,11 @@ fun DetailReservasiScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
-                                Button(onClick = {onEditClick (villa.id_villa)}) {
+                                Button(onClick = {onEditClick (villa.id_villa)},
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFF00BFFF),
+                                        contentColor = Color.White
+                                    )) {
                                     Text("Edit Data")
                                 }
                             }

@@ -32,6 +32,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -91,8 +92,10 @@ fun HomeReservasiScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = navigateToInsertReservasi,
-                shape = MaterialTheme.shapes.medium, modifier = Modifier.padding(18.dp),
-
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(18.dp),
+                containerColor = Color(0xFF00BFFF),
+                contentColor = Color.White
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Villa")
             }

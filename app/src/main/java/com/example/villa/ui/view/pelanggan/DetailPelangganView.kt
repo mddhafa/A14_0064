@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -24,8 +25,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.villa.ui.customwidget.CostumeTopAppBar
 import com.example.villa.ui.navigation.DestinasiNavigasi
 import com.example.villa.ui.viewmodel.PenyediaViewModel
 import com.example.villa.ui.viewmodel.pelanggan.DetailPelangganUiState
@@ -42,25 +45,22 @@ object DestinasiDetaiPelanggan : DestinasiNavigasi{
 @Composable
 fun DetailPelangganScreen(
     onEditClick: (Int) -> Unit,
+    navigateBack: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailPelangganViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val uiState = viewModel.pelangganUiState
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(DestinasiDetaiPelanggan.titleRes) },
-                navigationIcon = {
-                    IconButton(onClick = { onBackClick() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+            CostumeTopAppBar(
+                title = DestinasiDetaiPelanggan.titleRes,
+                canNavigateBack = true,
+                scrollBehavior = scrollBehavior,
+                navigateUp = navigateBack
             )
         },
         content = { paddingValues ->
@@ -105,7 +105,12 @@ fun DetailPelangganScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
-                                Button(onClick = {onEditClick (pelanggan.id_pelanggan)}) {
+                                Button(onClick = {onEditClick (pelanggan.id_pelanggan)},
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFF00BFFF),
+                                        contentColor = Color.White
+                                    )
+                                ) {
                                     Text("Edit Data")
                                 }
                                 Button(onClick = {
@@ -116,7 +121,12 @@ fun DetailPelangganScreen(
                                         },
                                         onError = {}
                                     )
-                                }) {
+                                },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFF00BFFF),
+                                        contentColor = Color.White
+                                    )
+                                ) {
                                     Text("Hapus Pelanggan")
                                 }
                             }

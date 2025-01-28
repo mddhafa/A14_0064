@@ -110,7 +110,8 @@ fun PengelolaHalaman(
                         println("DetailScreen: Navigating to ${DestinasiUpdateVilla.route}/$id_villa")
                         navController.navigate("${DestinasiUpdateVilla.route}/$id_villa")
                     },
-                    navigateToInsertReservasi = {navController.navigate(DestinasiInsertReservasi.route)}
+                    navigateToInsertReservasi = {navController.navigate(DestinasiInsertReservasi.route)},
+                    navigateBack = {navController.popBackStack()}
                 )
             }
         }
@@ -166,7 +167,8 @@ fun PengelolaHalaman(
                         id_pelanggan ->
                         println("DetailPelangganScreen: Navigating to ${DestinasiUpdatePelanggan.route}/$id_pelanggan")
                         navController.navigate("${DestinasiUpdatePelanggan.route}/$id_pelanggan")
-                    }
+                    },
+                    navigateBack = {navController.popBackStack()}
                 )
             }
         }
@@ -221,9 +223,9 @@ fun PengelolaHalaman(
                 onBackClick = { navController.popBackStack() },
                 onEditClick = {
                     navController.navigate("${DestinasiUpdateReservasi.route}/$id_reservasi")
-                }
-            )
-
+                },
+                navigateBack = {navController.popBackStack()},
+                )
         }
         composable(DestinasiInsertReservasi.route){
             InsertReservasiScreen(

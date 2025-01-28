@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -24,11 +25,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.villa.model.Review
 import com.example.villa.model.Villa
+import com.example.villa.ui.customwidget.CostumeTopAppBar
 import com.example.villa.ui.navigation.DestinasiNavigasi
+import com.example.villa.ui.view.pelanggan.DestinasiDetaiPelanggan
 import com.example.villa.ui.viewmodel.PenyediaViewModel
 import com.example.villa.ui.viewmodel.villa.DetailVillaUiState
 import com.example.villa.ui.viewmodel.villa.DetailVillaViewModel
@@ -44,6 +48,7 @@ object DestinasiDetailVilla : DestinasiNavigasi {
 @Composable
 fun DetailScreen(
     onEditClick: (Int) -> Unit,
+    navigateBack: () -> Unit,
     onDeleteClick: (Villa) -> Unit = {},
     navigateToInsertReservasi: () -> Unit,
     onBackClick: () -> Unit,
@@ -51,20 +56,15 @@ fun DetailScreen(
     viewModel: DetailVillaViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val uiState = viewModel.villaDetailState
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(DestinasiDetailVilla.titleRes) },
-                navigationIcon = {
-                    IconButton(onClick = { onBackClick() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+            CostumeTopAppBar(
+                title = DestinasiDetailVilla.titleRes,
+                canNavigateBack = true,
+                scrollBehavior = scrollBehavior,
+                navigateUp = navigateBack
             )
         },
         content = { paddingValues ->
@@ -127,7 +127,11 @@ fun DetailScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
-                                Button(onClick = { onEditClick(villa.id_villa) }) {
+                                Button(onClick = { onEditClick(villa.id_villa) },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFF00BFFF),
+                                        contentColor = Color.White
+                                )) {
                                     Text("Edit Villa")
                                 }
                                 Button(onClick = {
@@ -138,10 +142,18 @@ fun DetailScreen(
                                         },
                                         onError = {}
                                     )
-                                }) {
+                                },colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFF00BFFF),
+                                    contentColor = Color.White
+                                )
+                                ) {
                                     Text("Hapus Villa")
                                 }
-                                Button(onClick = navigateToInsertReservasi) {
+                                Button(onClick = navigateToInsertReservasi,
+                                    colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFF00BFFF),
+                                    contentColor = Color.White
+                                )) {
                                     Text("Reservasi Villa")
                                 }
                             }

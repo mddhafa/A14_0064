@@ -64,7 +64,6 @@ fun HomeTokoView(
         topBar = {
             Navbar(
                 nama = "Ayo Reservasi Villa di Sini",
-                showBackButton = false
             )
         },
         bottomBar = {

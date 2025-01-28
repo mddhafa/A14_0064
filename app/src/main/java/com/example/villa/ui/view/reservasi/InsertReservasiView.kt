@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
+import androidx.compose.material3.ButtonDefaults
 import com.example.villa.ui.customwidget.CostumeTopAppBar
 import com.example.villa.ui.navigation.DestinasiNavigasi
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -120,7 +122,11 @@ fun EntryBodyReservasi(
         Button(
             onClick = onSaveClick,
             shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF00BFFF),
+                contentColor = Color.White
+            )
         ) {
             Text(text = "Simpan")
         }
@@ -165,7 +171,12 @@ fun FormInputReservasi(
                     calendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF00BFFF),
+                contentColor = Color.White
+            )
+
         ) {
             Text(text = if (checkInDate.value.isEmpty()) "Select Check-In Date" else "Check-In: ${checkInDate.value}")
         }
@@ -186,7 +197,12 @@ fun FormInputReservasi(
                     calendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF00BFFF),
+                contentColor = Color.White
+            )
+
         ) {
             Text(text = if (checkOutDate.value.isEmpty()) "Select Check-Out Date" else "Check-Out: ${checkOutDate.value}")
         }
